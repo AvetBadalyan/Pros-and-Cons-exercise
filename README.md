@@ -1,5 +1,9 @@
 # React-Redux Application about PROS AND CONS created with React + TypeScript + Vite
 
+## Here is how this simple App looks like
+
+![Screenshot](./screen.jpg)
+
 ## This summarizes the primary data flow in my application.
 
 ## Initialization
