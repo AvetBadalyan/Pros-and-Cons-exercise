@@ -1,4 +1,3 @@
-// FeatForm.tsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeat } from "../Store/actions/actionCreators";

@@ -1,4 +1,3 @@
-// import { ADD_FEAT, DELETE_FEAT, EMPTY_STORE } from "../actions/actionTypes";
 import { ACTION_TYPES } from "../actions/actionTypes";
 import { FeatAction, FeaturesState } from "../actions/types";
 

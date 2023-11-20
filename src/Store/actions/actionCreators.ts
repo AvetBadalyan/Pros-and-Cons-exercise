@@ -1,7 +1,6 @@
 import { ACTION_TYPES } from "./actionTypes";
 import { EmptyStoreAction } from "./types";
 
-// Action creators
 export const addFeat = (text: string, featureType: string) => ({
   type: ACTION_TYPES.ADD_FEAT,
   payload: {
