@@ -5,7 +5,7 @@ const storedFeatures = localStorage.getItem("storedFeatures");
 
 const initialState: FeaturesState = storedFeatures
   ? JSON.parse(storedFeatures)
-  : [];
+  : { pros: [], cons: [] };
 
 const featReducer = (
   state = initialState,
@@ -13,13 +13,13 @@ const featReducer = (
 ): FeaturesState => {
   switch (action.type) {
     case ACTION_TYPES.ADD_FEAT:
-      return [...state, action.payload];
+      return state;
 
     case ACTION_TYPES.DELETE_FEAT:
-      return state.filter((feat) => feat.id !== action.payload.id);
+      return state;
 
     case ACTION_TYPES.EMPTY_STORE:
-      return state.filter((feat) => feat.featureType !== action.payload);
+      return state;
 
     default:
       return state;

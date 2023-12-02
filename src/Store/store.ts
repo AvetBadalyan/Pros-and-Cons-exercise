@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import featReducer from "./reducers/featReducer";
+import featReducer from "./FeatureSlice/reducers/featReducer";
 import { Dispatch } from "redux";
-import { FeatAction } from "./actions/types";
+import { FeatAction } from "./FeatureSlice/actions/types";
 import thunk from "redux-thunk";
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFeat } from "../Store/actions/actionCreators";
-import { AddFeatAction, SingleFeature } from "../Store/actions/types";
-import { AppDispatch, RootState } from "../Store/store";
+import { addFeat } from "../../Store/FeatureSlice/actions/actionCreators";
+import {
+  AddFeatAction,
+  SingleFeature,
+} from "../../Store/FeatureSlice/actions/types";
+import { AppDispatch, RootState } from "../../Store/store";
 import "./featureForm.scss";
 
 const FeatureForm = ({ featureType }: { featureType: string }) => {

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../Store/store";
-import { SingleFeature } from "../Store/actions/types";
-import FeatureItem from "./featureItem";
+import { RootState } from "../../Store/store";
+import { SingleFeature } from "../../Store/FeatureSlice/actions/types";
+import FeatureItem from "../FeatureItem/featureItem";
 
 const FeatureList = ({ featureType }: { featureType: string }) => {
   const feats = useSelector((state: RootState) => state.featuresSlice);

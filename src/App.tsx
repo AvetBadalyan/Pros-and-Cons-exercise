@@ -1,11 +1,11 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import "./App.scss";
-import FeatureForm from "./components/featureForm";
-import FeatureList from "./components/featureList";
-import { emptyStore } from "./Store/actions/actionCreators";
-import GoogleIcon from "./components/Icon";
+import { emptyStore } from "./Store/FeatureSlice/actions/actionCreators";
+import GoogleIcon from "./assets/icons/Icon";
 import { AppDispatch } from "./Store/store";
+import FeatureForm from "./components/FeatureForm/featureForm";
+import FeatureList from "./components/FeatureList/featureList";
+import "./App.scss";
 
 function App() {
   const featureTypes = ["Pros", "Cons"];
