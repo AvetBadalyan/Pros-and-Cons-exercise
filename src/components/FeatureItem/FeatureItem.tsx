@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { deleteFeat } from "../../Store/FeatureSlice/actions/actionCreators";
-import "./../App.scss";
+import "./../../App.scss";
 import {
   DeleteFeatAction,
   SingleFeature,

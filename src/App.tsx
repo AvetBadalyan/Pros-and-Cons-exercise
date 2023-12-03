@@ -1,20 +1,20 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { emptyStore } from "./Store/FeatureSlice/actions/actionCreators";
+import { emptyTypeStore } from "./Store/FeatureSlice/actions/actionCreators";
 import GoogleIcon from "./assets/icons/Icon";
 import { AppDispatch } from "./Store/store";
-import FeatureForm from "./components/FeatureForm/featureForm";
-import FeatureList from "./components/FeatureList/featureList";
 import "./App.scss";
+import FeatureForm from "./components/FeatureForm/FeatureForm";
+import FeatureList from "./components/FeatureList/FeatureList";
 
 function App() {
   const featureTypes = ["Pros", "Cons"];
 
   const dispatch: AppDispatch = useDispatch();
 
-  const emptyStoreHandler = useCallback(
+  const emptyTypeStoreHandler = useCallback(
     (featureType: string) => {
-      dispatch(emptyStore(featureType));
+      dispatch(emptyTypeStore(featureType));
     },
     [dispatch]
   );
@@ -28,7 +28,7 @@ function App() {
             <div className="form-header">
               <h2>Input here the {featureType}</h2>
               <button
-                onClick={() => emptyStoreHandler(featureType)}
+                onClick={() => emptyTypeStoreHandler(featureType)}
                 className="empty-btn"
               >
                 <GoogleIcon fill="white" width="16px" height="15px" />

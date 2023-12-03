@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Store/store";
 import { SingleFeature } from "../../Store/FeatureSlice/actions/types";
-import FeatureItem from "../FeatureItem/featureItem";
+import FeatureItem from "../FeatureItem/FeatureItem";
 
 const FeatureList = ({ featureType }: { featureType: string }) => {
   const feats = useSelector((state: RootState) => state.featuresSlice);
-
+  console.log(feats, "feats");
   useEffect(() => {
     const sendToLocalStorage = () => {
       try {
@@ -24,7 +24,7 @@ const FeatureList = ({ featureType }: { featureType: string }) => {
 
   return (
     <div className="feature-list">
-      {feats.map((singleFeature: SingleFeature) => {
+      {feats.pros?.map((singleFeature: SingleFeature) => {
         if (singleFeature.featureType === featureType) {
           return <FeatureItem key={singleFeature.id} feature={singleFeature} />;
         }

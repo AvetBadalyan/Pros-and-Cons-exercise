@@ -47,7 +47,7 @@
 
 ## Empty Store Button
 
-- The `emptyStoreHandler` function in the `App` component dispatches the `emptyStore` action when the "Empty" button is clicked.
+- The `emptyTypeStoreHandler` function in the `App` component dispatches the `emptyTypeStore` action when the "Empty" button is clicked.
 - This action is processed by the `featReducer`, which removes all features of the specified type from the Redux store.
 
 ## Local Storage Interaction

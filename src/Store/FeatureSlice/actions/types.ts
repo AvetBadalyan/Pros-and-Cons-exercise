@@ -6,7 +6,9 @@ export interface SingleFeature {
   featureType: string;
 }
 
-export type FeaturesState = SingleFeature[];
+export interface FeaturesState {
+  [key: string]: SingleFeature[];
+}
 
 export interface AddFeatAction {
   type: ACTION_TYPES.ADD_FEAT;
@@ -15,12 +17,15 @@ export interface AddFeatAction {
 
 export interface DeleteFeatAction {
   type: ACTION_TYPES.DELETE_FEAT;
-  payload: { id: string };
+  payload: { id: string; featureType: string };
 }
 
-export interface EmptyStoreAction {
-  type: ACTION_TYPES.EMPTY_STORE;
+export interface EmptyTypeStoreAction {
+  type: ACTION_TYPES.EMPTY_TYPE_STORE;
   payload: string;
 }
 
-export type FeatAction = AddFeatAction | DeleteFeatAction | EmptyStoreAction;
+export type FeatAction =
+  | AddFeatAction
+  | DeleteFeatAction
+  | EmptyTypeStoreAction;
