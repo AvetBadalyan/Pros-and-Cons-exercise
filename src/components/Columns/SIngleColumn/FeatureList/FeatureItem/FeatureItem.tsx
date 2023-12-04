@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
-import { deleteFeat } from "../../Store/FeatureSlice/actions/actionCreators";
-import "./../../App.scss";
+
+import { memo, useCallback } from "react";
+import { deleteFeat } from "../../../../../Store/FeatureSlice/actions/actionCreators";
+import { AppDispatch } from "../../../../../Store/store";
 import {
   DeleteFeatAction,
   SingleFeature,
-} from "../../Store/FeatureSlice/actions/types";
-import { memo, useCallback } from "react";
-import { AppDispatch } from "../../Store/store";
+} from "../../../../../Store/FeatureSlice/actions/types";
 
 const FeatureItem: React.FC<{ feature: SingleFeature }> = memo(
   ({ feature }) => {

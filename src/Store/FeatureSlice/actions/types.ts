@@ -3,6 +3,7 @@ import { ACTION_TYPES } from "./actionTypes";
 export interface SingleFeature {
   id: string;
   text: string;
+  description: string;
   featureType: string;
 }
 
@@ -17,7 +18,7 @@ export interface AddFeatAction {
 
 export interface DeleteFeatAction {
   type: ACTION_TYPES.DELETE_FEAT;
-  payload: { id: string; featureType: string };
+  payload: { id: string };
 }
 
 export interface EmptyTypeStoreAction {

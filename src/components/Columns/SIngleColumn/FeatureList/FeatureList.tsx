@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../Store/store";
-import { SingleFeature } from "../../Store/FeatureSlice/actions/types";
-import FeatureItem from "../FeatureItem/FeatureItem";
+import { RootState } from "../../../../Store/store";
+import FeatureItem from "./FeatureItem/FeatureItem";
+import { SingleFeature } from "../../../../Store/FeatureSlice/actions/types";
 
 const FeatureList = ({ featureType }: { featureType: string }) => {
   const feats = useSelector((state: RootState) => state.featuresSlice);
-  console.log(feats, "feats");
+
   useEffect(() => {
     const sendToLocalStorage = () => {
       try {
