@@ -11,14 +11,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
-    -45deg,
-    rgb(2, 0, 36),
-    rgb(9, 9, 121),
-    rgb(0, 212, 255)
-  );
-  background-size: 400% 400%;
-  animation: gradientAnimation 15s ease infinite;
+  background: url("./assets//dark.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
 }
 
@@ -29,18 +25,4 @@ code {
 
 button {
   cursor: pointer;
-}
-
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
 }

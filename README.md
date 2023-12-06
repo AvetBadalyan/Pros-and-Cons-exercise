@@ -18,7 +18,7 @@
 
 ## Rendering Feature Types
 
-- The `App` component maps over `featureTypes` (Pros and Cons) and renders a separate side for each.
+- The `App` component maps over `featureTypes` (PROS and CONS) and renders a separate side for each.
 - Each side contains a `FeatureForm` and a `FeatureList` for the corresponding feature type.
 
 ## FeatureForm Component

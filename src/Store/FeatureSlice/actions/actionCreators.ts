@@ -8,16 +8,16 @@ export const addFeat = (
 ): AddFeatAction => ({
   type: ACTION_TYPES.ADD_FEAT,
   payload: {
-    id: Math.random().toString(),
+    id: Number(Math.round(Math.random() * 10000)).toString(),
     text,
-    description, // Add this line
+    description,
     featureType,
   },
 });
 
-export const deleteFeat = (id: string) => ({
+export const deleteFeat = (id: string, featureType: string) => ({
   type: ACTION_TYPES.DELETE_FEAT,
-  payload: { id },
+  payload: { id, featureType },
 });
 
 export const emptyTypeStore = (featureType: string): EmptyTypeStoreAction => {

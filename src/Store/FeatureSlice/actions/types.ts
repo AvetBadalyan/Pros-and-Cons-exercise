@@ -18,7 +18,7 @@ export interface AddFeatAction {
 
 export interface DeleteFeatAction {
   type: ACTION_TYPES.DELETE_FEAT;
-  payload: { id: string };
+  payload: { id: string; featureType: string };
 }
 
 export interface EmptyTypeStoreAction {

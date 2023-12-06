@@ -24,7 +24,7 @@ const FeatureList = ({ featureType }: { featureType: string }) => {
 
   return (
     <div className="feature-list">
-      {feats.pros?.map((singleFeature: SingleFeature) => {
+      {feats[featureType].map((singleFeature: SingleFeature) => {
         if (singleFeature.featureType === featureType) {
           return <FeatureItem key={singleFeature.id} feature={singleFeature} />;
         }

@@ -4,7 +4,7 @@ import React from "react";
 import Columns from "../../components/Columns/Columns";
 
 const HomePage: React.FC = () => {
-  const featureTypes: string[] = ["pros", "cons"];
+  const featureTypes: string[] = ["PROS", "CONS"];
 
   return (
     <div className="Home">

@@ -6,8 +6,8 @@ const storedFeatures = localStorage.getItem("storedFeatures");
 const initialState: FeaturesState = storedFeatures
   ? JSON.parse(storedFeatures)
   : {
-      pros: [],
-      cons: [],
+      PROS: [],
+      CONS: [],
     };
 
 const featReducer = (
