@@ -26,7 +26,18 @@ export interface EmptyTypeStoreAction {
   payload: string;
 }
 
+export interface UpdateFeatAction {
+  type: ACTION_TYPES.UPDATE_FEAT;
+  payload: {
+    id: string;
+    featureType: string;
+    text: string;
+    description: string;
+  };
+}
+
 export type FeatAction =
   | AddFeatAction
   | DeleteFeatAction
-  | EmptyTypeStoreAction;
+  | EmptyTypeStoreAction
+  | UpdateFeatAction;

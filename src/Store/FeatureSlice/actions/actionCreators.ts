@@ -1,5 +1,5 @@
 import { ACTION_TYPES } from "./actionTypes";
-import { AddFeatAction, EmptyTypeStoreAction } from "./types";
+import { AddFeatAction, EmptyTypeStoreAction, UpdateFeatAction } from "./types";
 
 export const addFeat = (
   text: string,
@@ -26,3 +26,18 @@ export const emptyTypeStore = (featureType: string): EmptyTypeStoreAction => {
     payload: featureType,
   };
 };
+
+export const updateFeat = (
+  id: string,
+  featureType: string,
+  editedText: string,
+  editedDescription: string
+): UpdateFeatAction => ({
+  type: ACTION_TYPES.UPDATE_FEAT,
+  payload: {
+    id,
+    featureType,
+    text: editedText,
+    description: editedDescription,
+  },
+});

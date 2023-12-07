@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -7,28 +7,27 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 
-interface FeatureModalProps {
+export interface FeatureModalProps {
+  isOpen: boolean;
+  onClose: () => void;
   onSave: (text: string, description: string) => void;
   featureType: string;
+  isEditing?: boolean;
+  initialText?: string;
+  initialDescription?: string;
 }
 
-const FeatureModal: React.FC<FeatureModalProps> = ({ onSave, featureType }) => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [text, setText] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleSave = () => {
-    onSave(text, description);
-    handleCloseModal();
-  };
+const FeatureModal: React.FC<FeatureModalProps> = ({
+  isOpen,
+  onClose,
+  onSave,
+  featureType,
+  isEditing = false,
+  initialText = "",
+  initialDescription = "",
+}) => {
+  const [text, setText] = React.useState(initialText);
+  const [description, setDescription] = React.useState(initialDescription);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
@@ -38,40 +37,43 @@ const FeatureModal: React.FC<FeatureModalProps> = ({ onSave, featureType }) => {
     setDescription(e.target.value);
   };
 
-  return (
-    <React.Fragment>
-      <Button variant="outlined" onClick={handleOpenModal}>
-        {makeUpperCase(`Add a new feature in ${featureType}`)}
-      </Button>
-      <Dialog open={isModalOpen} onClose={handleCloseModal}>
-        <DialogTitle>{`ADD NEW ${featureType}`}</DialogTitle>
+  const handleSave = () => {
+    onSave(text, description);
+    onClose();
+  };
 
-        <DialogContent>
-          <TextField
-            label="Feature Text"
-            fullWidth
-            margin="normal"
-            value={text}
-            onChange={handleTextChange}
-          />
-          <TextField
-            label="Feature Description"
-            fullWidth
-            multiline
-            rows={4}
-            margin="normal"
-            value={description}
-            onChange={handleDescriptionChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseModal}>Cancel</Button>
-          <Button variant="contained" onClick={handleSave}>
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
+  return (
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>
+        {isEditing
+          ? makeUpperCase(`Edit ${featureType}`)
+          : makeUpperCase(`Add a new feature in ${featureType}`)}
+      </DialogTitle>
+      <DialogContent>
+        <TextField
+          label="Feature Text"
+          fullWidth
+          margin="normal"
+          value={text}
+          onChange={handleTextChange}
+        />
+        <TextField
+          label="Feature Description"
+          fullWidth
+          multiline
+          rows={4}
+          margin="normal"
+          value={description}
+          onChange={handleDescriptionChange}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose}>Cancel</Button>
+        <Button variant="contained" onClick={handleSave}>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 

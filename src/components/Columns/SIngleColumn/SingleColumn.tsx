@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import FeatureModal from "../../Modals/FeatureModal/FeatureModal";
 import GoogleIcon from "../../../assets/icons/Icon";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../Store/store";
@@ -9,6 +8,8 @@ import {
 } from "../../../Store/FeatureSlice/actions/actionCreators";
 import FeatureList from "./FeatureList/FeatureList";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
+import { useModal } from "../../../Helpers/useModalHook";
+import { Button } from "@mui/material";
 
 interface SingleColumnProps {
   featureType: string;
@@ -17,10 +18,15 @@ interface SingleColumnProps {
 const SingleColumn: React.FC<SingleColumnProps> = ({ featureType }) => {
   const dispatch: AppDispatch = useDispatch();
   const feats = useSelector((state: RootState) => state.featuresSlice);
-  console.log(feats, "feats");
+  const { isOpen, openModal, closeModal, ModalController } = useModal();
 
   const handleSaveFeature = (text: string, description: string) => {
     dispatch(addFeat(text, description, featureType));
+    closeModal();
+  };
+
+  const handleOpenModal = () => {
+    openModal();
   };
 
   const emptyTypeStoreHandler = useCallback(
@@ -34,7 +40,18 @@ const SingleColumn: React.FC<SingleColumnProps> = ({ featureType }) => {
     <div className="side" key={featureType}>
       <div className="form-header">
         <h2> {makeUpperCase(`Your ${featureType} here`)} </h2>
-        <FeatureModal onSave={handleSaveFeature} featureType={featureType} />
+        <Button variant="outlined" onClick={handleOpenModal}>
+          {makeUpperCase(`Add a new feature in ${featureType}`)}
+        </Button>
+        {ModalController && (
+          <ModalController
+            onSave={handleSaveFeature}
+            featureType={featureType}
+            isOpen={isOpen}
+            onClose={closeModal}
+          />
+        )}
+
         <button
           onClick={() => emptyTypeStoreHandler(featureType)}
           className="empty-btn"
