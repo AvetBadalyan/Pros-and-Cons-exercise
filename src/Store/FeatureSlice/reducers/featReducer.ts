@@ -44,7 +44,6 @@ const featReducer = (
       );
 
       if (featureToUpdate) {
-        // If found, update the feature's text and description
         featureToUpdate.text = action.payload.text;
         featureToUpdate.description = action.payload.description;
       }

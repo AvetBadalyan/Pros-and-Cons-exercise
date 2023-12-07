@@ -55,6 +55,7 @@ const FeatureItem: React.FC<{ feature: SingleFeature }> = memo(
             initialDescription={feature.description}
             isOpen={isOpen}
             onClose={closeModal}
+            featureId={id}
           />
         )}
         <button onClick={handleDelete}>Delete</button>
