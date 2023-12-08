@@ -39,16 +39,28 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
   const validateTextInput = (textInput: string) => {
     const trimmedText = textInput.trim();
     if (!trimmedText) {
-      setErrormessage("Required! Text can not be empty!");
+      setErrormessage("Required! Text cannot be empty!");
     } else {
-      const featureAlreadyExists = feats[featureType].some((feature) => {
+      const existingInPros = feats["PROS"].some((feature) => {
+        console.log(feature, "feature");
         const isSameName =
           feature.text.toLowerCase() === trimmedText.toLowerCase();
         return isEditing ? isSameName && featureId !== feature.id : isSameName;
       });
-      featureAlreadyExists
-        ? setErrormessage("Feature Already exists!")
-        : setErrormessage("");
+
+      const existingInCons = feats["CONS"].some((feature) => {
+        const isSameName =
+          feature.text.toLowerCase() === trimmedText.toLowerCase();
+        return isEditing ? isSameName && featureId !== feature.id : isSameName;
+      });
+
+      if (existingInPros || existingInCons) {
+        setErrormessage(
+          "Feature already exists in either Pros or Cons column!"
+        );
+      } else {
+        setErrormessage("");
+      }
     }
   };
 
