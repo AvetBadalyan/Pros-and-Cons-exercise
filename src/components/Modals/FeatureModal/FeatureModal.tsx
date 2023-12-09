@@ -13,12 +13,13 @@ import { RootState } from "../../../Store/store";
 export interface FeatureModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (text: string, description: string) => void;
+  onSave: (featureText: string, featureDescription: string) => void;
   featureType: string;
   isEditing?: boolean;
   initialText?: string;
   initialDescription?: string;
   featureId?: string;
+  featureTypes: string[];
 }
 
 const FeatureModal: React.FC<FeatureModalProps> = ({
@@ -30,51 +31,54 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
   initialText = "",
   initialDescription = "",
   featureId = "",
+  featureTypes,
 }) => {
-  const [text, setText] = React.useState(initialText);
-  const [description, setDescription] = React.useState(initialDescription);
-  const [errorMessage, setErrormessage] = useState("");
-  const feats = useSelector((state: RootState) => state.featuresSlice);
+  const [featureText, setFeatureText] = React.useState(initialText);
+  const [featureDescription, setFeatureDescription] =
+    React.useState(initialDescription);
+  const [errorMessage, setErrorMessage] = useState("");
+  const features = useSelector((state: RootState) => state.featuresSlice);
 
-  const validateTextInput = (textInput: string) => {
-    const trimmedText = textInput.trim();
+  const validateFeatureText = (text: string) => {
+    const trimmedText = text.trim();
+
     if (!trimmedText) {
-      setErrormessage("Required! Text cannot be empty!");
-    } else {
-      const existingInPros = feats["PROS"].some((feature) => {
-        console.log(feature, "feature");
+      setErrorMessage("Required! Text cannot be empty!");
+      return;
+    }
+
+    const isDuplicate = featureTypes.some((type) => {
+      const duplicateInColumn = features[type].some((feature) => {
         const isSameName =
           feature.text.toLowerCase() === trimmedText.toLowerCase();
         return isEditing ? isSameName && featureId !== feature.id : isSameName;
       });
 
-      const existingInCons = feats["CONS"].some((feature) => {
-        const isSameName =
-          feature.text.toLowerCase() === trimmedText.toLowerCase();
-        return isEditing ? isSameName && featureId !== feature.id : isSameName;
-      });
-
-      if (existingInPros || existingInCons) {
-        setErrormessage(
-          "Feature already exists in either Pros or Cons column!"
-        );
-      } else {
-        setErrormessage("");
+      if (duplicateInColumn) {
+        setErrorMessage(`Feature already exists in ${type} column!`);
       }
+
+      return duplicateInColumn;
+    });
+
+    if (!isDuplicate) {
+      setErrorMessage("");
     }
   };
 
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
-    validateTextInput(e.target.value);
+  const handleFeatureTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFeatureText(e.target.value);
+    validateFeatureText(e.target.value);
   };
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDescription(e.target.value);
+  const handleFeatureDescriptionChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setFeatureDescription(e.target.value);
   };
 
   const handleSave = () => {
-    onSave(text, description);
+    onSave(featureText, featureDescription);
     onClose();
   };
 
@@ -90,8 +94,8 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
           label="Feature Text"
           fullWidth
           margin="normal"
-          value={text}
-          onChange={handleTextChange}
+          value={featureText}
+          onChange={handleFeatureTextChange}
           required
         />
         {errorMessage && (
@@ -101,7 +105,6 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
               border: "1px solid red",
               padding: "8px",
               boxSizing: "border-box",
-              // display: "inline-block",
             }}
           >
             Error: {errorMessage}
@@ -114,14 +117,14 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
           multiline
           rows={4}
           margin="normal"
-          value={description}
-          onChange={handleDescriptionChange}
+          value={featureDescription}
+          onChange={handleFeatureDescriptionChange}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
         <Button
-          disabled={!!errorMessage || !text}
+          disabled={!!errorMessage || !featureText}
           variant="contained"
           onClick={handleSave}
         >

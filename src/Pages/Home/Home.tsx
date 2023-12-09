@@ -4,12 +4,10 @@ import React from "react";
 import Columns from "../../components/Columns/Columns";
 
 const HomePage: React.FC = () => {
-  const featureTypes: string[] = ["PROS", "CONS"];
-
   return (
     <div className="Home">
       <h1>Is LinkedIn helpful for finding a job?</h1>
-      <Columns featureTypes={featureTypes} />
+      <Columns />
     </div>
   );
 };

@@ -4,7 +4,13 @@ import { RootState } from "../../../../Store/store";
 import FeatureItem from "./FeatureItem/FeatureItem";
 import { SingleFeature } from "../../../../Store/FeatureSlice/actions/types";
 
-const FeatureList = ({ featureType }: { featureType: string }) => {
+const FeatureList = ({
+  featureType,
+  featureTypes,
+}: {
+  featureType: string;
+  featureTypes: string[];
+}) => {
   const feats = useSelector((state: RootState) => state.featuresSlice);
 
   useEffect(() => {
@@ -26,7 +32,13 @@ const FeatureList = ({ featureType }: { featureType: string }) => {
     <div className="feature-list">
       {feats[featureType].map((singleFeature: SingleFeature) => {
         if (singleFeature.featureType === featureType) {
-          return <FeatureItem key={singleFeature.id} feature={singleFeature} />;
+          return (
+            <FeatureItem
+              key={singleFeature.id}
+              feature={singleFeature}
+              featureTypes={featureTypes}
+            />
+          );
         }
         return null;
       })}

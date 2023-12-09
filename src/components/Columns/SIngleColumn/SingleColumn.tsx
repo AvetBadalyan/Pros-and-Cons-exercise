@@ -13,9 +13,13 @@ import { Button } from "@mui/material";
 
 interface SingleColumnProps {
   featureType: string;
+  featureTypes: string[];
 }
 
-const SingleColumn: React.FC<SingleColumnProps> = ({ featureType }) => {
+const SingleColumn: React.FC<SingleColumnProps> = ({
+  featureType,
+  featureTypes,
+}) => {
   const dispatch: AppDispatch = useDispatch();
   const feats = useSelector((state: RootState) => state.featuresSlice);
   const { isOpen, openModal, closeModal, ModalController } = useModal();
@@ -49,6 +53,7 @@ const SingleColumn: React.FC<SingleColumnProps> = ({ featureType }) => {
             featureType={featureType}
             isOpen={isOpen}
             onClose={closeModal}
+            featureTypes={featureTypes}
           />
         )}
 
@@ -62,7 +67,7 @@ const SingleColumn: React.FC<SingleColumnProps> = ({ featureType }) => {
         </button>
       </div>
 
-      <FeatureList featureType={featureType} />
+      <FeatureList featureType={featureType} featureTypes={featureTypes} />
     </div>
   );
 };

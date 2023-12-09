@@ -38,7 +38,7 @@ const featReducer = (
         [action.payload]: [],
       };
 
-    case ACTION_TYPES.UPDATE_FEAT:
+    case ACTION_TYPES.UPDATE_FEAT:{
       const featureToUpdate = state[action.payload.featureType].find(
         (feat) => feat.id === action.payload.id
       );
@@ -51,7 +51,7 @@ const featReducer = (
       return {
         ...state,
         [action.payload.featureType]: [...state[action.payload.featureType]],
-      };
+      };}
 
     default:
       return state;
