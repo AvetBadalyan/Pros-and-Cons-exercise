@@ -10,6 +10,8 @@ import FeatureList from "./FeatureList/FeatureList";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 import { useModal } from "../../../Helpers/useModalHook";
 import { Button } from "@mui/material";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface SingleColumnProps {
   featureType: string;
@@ -26,7 +28,7 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
 
   const handleSaveFeature = (text: string, description: string) => {
     dispatch(addFeat(text, description, featureType));
-    closeModal();
+    toast.success("Successfully saved!");
   };
 
   const handleOpenModal = () => {
@@ -47,7 +49,20 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
         <Button variant="outlined" onClick={handleOpenModal}>
           {makeUpperCase(`Add a new feature in ${featureType}`)}
         </Button>
-        {ModalController && (
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+
+        {isOpen && ModalController && (
           <ModalController
             onSave={handleSaveFeature}
             featureType={featureType}

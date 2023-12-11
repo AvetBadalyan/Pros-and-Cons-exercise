@@ -48,7 +48,7 @@ const FeatureItem: React.FC<{
         <p className="feature-item-text">{text}</p>
       </Link>
       <button onClick={handleEdit}>Edit</button>
-      {ModalController && (
+      {isOpen && ModalController && (
         <ModalController
           onSave={handleUpdateFeature}
           featureType={feature.featureType}

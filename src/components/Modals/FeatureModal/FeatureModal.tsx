@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -6,9 +6,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
-import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Store/store";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export interface FeatureModalProps {
   isOpen: boolean;
@@ -36,7 +37,7 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
   const [featureText, setFeatureText] = React.useState(initialText);
   const [featureDescription, setFeatureDescription] =
     React.useState(initialDescription);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const features = useSelector((state: RootState) => state.featuresSlice);
 
   const validateFeatureText = (text: string) => {
@@ -82,56 +83,62 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
     onClose();
   };
 
-  return (
-    <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>
-        {isEditing
-          ? makeUpperCase(`Edit ${featureType}`)
-          : makeUpperCase(`Add a new feature in ${featureType}`)}
-      </DialogTitle>
-      <DialogContent sx={{ width: "555px" }}>
-        <TextField
-          label="Feature Text"
-          fullWidth
-          margin="normal"
-          value={featureText}
-          onChange={handleFeatureTextChange}
-          required
-        />
-        {errorMessage && (
-          <Box
-            sx={{
-              width: "100%",
-              border: "1px solid red",
-              padding: "8px",
-              boxSizing: "border-box",
-            }}
-          >
-            Error: {errorMessage}
-          </Box>
-        )}
+  console.log(errorMessage, "errorMessage");
 
-        <TextField
-          label="Feature Description"
-          fullWidth
-          multiline
-          rows={4}
-          margin="normal"
-          value={featureDescription}
-          onChange={handleFeatureDescriptionChange}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button
-          disabled={!!errorMessage || !featureText}
-          variant="contained"
-          onClick={handleSave}
-        >
-          Save
-        </Button>
-      </DialogActions>
-    </Dialog>
+  useEffect(() => {
+    if (errorMessage !== null && errorMessage !== "") {
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [errorMessage]);
+
+  return (
+    <div>
+      <Dialog open={isOpen} onClose={onClose}>
+        <DialogTitle>
+          {isEditing
+            ? makeUpperCase(`Edit ${featureType}`)
+            : makeUpperCase(`Add a new feature in ${featureType}`)}
+        </DialogTitle>
+        <DialogContent sx={{ width: "555px" }}>
+          <TextField
+            label="Feature Text"
+            fullWidth
+            margin="normal"
+            value={featureText}
+            onChange={handleFeatureTextChange}
+            required
+          />
+          <TextField
+            label="Feature Description"
+            fullWidth
+            multiline
+            rows={4}
+            margin="normal"
+            value={featureDescription}
+            onChange={handleFeatureDescriptionChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Cancel</Button>
+          <Button
+            disabled={!!errorMessage || !featureText}
+            variant="contained"
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 };
 
