@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import GoogleIcon from "../../../assets/icons/Icon";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../Store/store";
+import EmptyIcon from "../../../assets/icons/Icon";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../Store/store";
 import {
   addFeat,
   emptyTypeStore,
@@ -12,18 +12,20 @@ import { useModal } from "../../../Helpers/useModalHook";
 import { Button } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
 
 interface SingleColumnProps {
   featureType: string;
   featureTypes: string[];
+  features: FeaturesState;
 }
 
 const SingleColumn: React.FC<SingleColumnProps> = ({
   featureType,
   featureTypes,
+  features,
 }) => {
   const dispatch: AppDispatch = useDispatch();
-  const feats = useSelector((state: RootState) => state.featuresSlice);
   const { isOpen, openModal, closeModal, ModalController } = useModal();
 
   const handleSaveFeature = (text: string, description: string) => {
@@ -69,20 +71,25 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
             isOpen={isOpen}
             onClose={closeModal}
             featureTypes={featureTypes}
+            features={features}
           />
         )}
 
         <button
           onClick={() => emptyTypeStoreHandler(featureType)}
           className="empty-btn"
-          disabled={feats[featureType].length < 0}
+          disabled={features[featureType].length < 0}
         >
-          <GoogleIcon fill="white" width="16px" height="15px" />
+          <EmptyIcon fill="white" width="16px" height="15px" />
           <span> Empty {featureType}</span>
         </button>
       </div>
 
-      <FeatureList featureType={featureType} featureTypes={featureTypes} />
+      <FeatureList
+        featureType={featureType}
+        featureTypes={featureTypes}
+        features={features}
+      />
     </div>
   );
 };

@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
 import SingleColumn from "./SIngleColumn/SingleColumn";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Store/store";
+import { FeaturesState } from "../../Store/FeatureSlice/actions/types";
 
-const Columns: React.FC = () => {
-  const features = useSelector((state: RootState) => state.featuresSlice);
+interface ColumnsProps {
+  features: FeaturesState;
+}
+
+const Columns: React.FC<ColumnsProps> = ({ features }) => {
   const featureTypes = useMemo(() => Object.keys(features), [features]);
 
   return (
@@ -14,6 +16,7 @@ const Columns: React.FC = () => {
           key={featureType}
           featureType={featureType}
           featureTypes={featureTypes}
+          features={features}
         />
       ))}
     </div>

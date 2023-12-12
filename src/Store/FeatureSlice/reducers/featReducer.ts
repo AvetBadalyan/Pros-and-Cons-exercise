@@ -1,14 +1,12 @@
 import { ACTION_TYPES } from "../actions/actionTypes";
 import { FeatAction, FeaturesState } from "../actions/types";
 
-const storedFeatures = localStorage.getItem("storedFeatures");
+const getStoredFeatures = (): FeaturesState => {
+  const storedFeatures = localStorage.getItem("storedFeatures");
+  return storedFeatures ? JSON.parse(storedFeatures) : { PROS: [], CONS: [] };
+};
 
-const initialState: FeaturesState = storedFeatures
-  ? JSON.parse(storedFeatures)
-  : {
-      PROS: [],
-      CONS: [],
-    };
+const initialState: FeaturesState = getStoredFeatures();
 
 const featReducer = (
   state = initialState,
@@ -38,7 +36,7 @@ const featReducer = (
         [action.payload]: [],
       };
 
-    case ACTION_TYPES.UPDATE_FEAT:{
+    case ACTION_TYPES.UPDATE_FEAT: {
       const featureToUpdate = state[action.payload.featureType].find(
         (feat) => feat.id === action.payload.id
       );
@@ -51,7 +49,8 @@ const featReducer = (
       return {
         ...state,
         [action.payload.featureType]: [...state[action.payload.featureType]],
-      };}
+      };
+    }
 
     default:
       return state;

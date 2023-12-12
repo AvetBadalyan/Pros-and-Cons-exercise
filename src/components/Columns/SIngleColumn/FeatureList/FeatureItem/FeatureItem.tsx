@@ -7,63 +7,65 @@ import {
 import { AppDispatch } from "../../../../../Store/store";
 import {
   DeleteFeatAction,
+  FeaturesState,
   SingleFeature,
 } from "../../../../../Store/FeatureSlice/actions/types";
 import { Link } from "react-router-dom";
 import "./FeatureItem.scss";
 import { useModal } from "../../../../../Helpers/useModalHook";
 
-const FeatureItem: React.FC<{
+interface FeatureItemProps {
   feature: SingleFeature;
   featureTypes: string[];
-}> = memo(({ feature, featureTypes }) => {
-  const dispatch: AppDispatch = useDispatch();
-  const { id, featureType, text } = feature;
-  const { isOpen, openModal, closeModal, ModalController } = useModal();
+  features: FeaturesState;
+}
 
-  const handleDelete = useCallback(() => {
-    dispatch(deleteFeat(id, featureType) as DeleteFeatAction);
-  }, [dispatch, id, featureType]);
+const FeatureItem: React.FC<FeatureItemProps> = memo(
+  ({ feature, featureTypes, features }) => {
+    const dispatch: AppDispatch = useDispatch();
+    const { id, featureType, text, description } = feature;
+    const { isOpen, openModal, closeModal, ModalController } = useModal();
 
-  const handleEdit = () => {
-    openModal();
-  };
+    const handleDelete = useCallback(() => {
+      dispatch(deleteFeat(id, featureType) as DeleteFeatAction);
+    }, [dispatch, id, featureType]);
 
-  const handleUpdateFeature = (
-    editedText: string,
-    editedDescription: string
-  ) => {
-    dispatch(updateFeat(id, featureType, editedText, editedDescription));
+    const handleEdit = () => {
+      openModal();
+    };
 
-    closeModal();
-  };
+    const handleUpdateFeature = (
+      editedText: string,
+      editedDescription: string
+    ) => {
+      dispatch(updateFeat(id, featureType, editedText, editedDescription));
+      closeModal();
+    };
 
-  return (
-    <div className="feature-item">
-      <Link
-        to={`/features/${featureType}/${id}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <p className="feature-item-text">{text}</p>
-      </Link>
-      <button onClick={handleEdit}>Edit</button>
-      {isOpen && ModalController && (
-        <ModalController
-          onSave={handleUpdateFeature}
-          featureType={feature.featureType}
-          isEditing={true}
-          initialText={feature.text}
-          initialDescription={feature.description}
-          isOpen={isOpen}
-          onClose={closeModal}
-          featureId={id}
-          featureTypes={featureTypes}
-        />
-      )}
-      <button onClick={handleDelete}>Delete</button>
-    </div>
-  );
-});
+    return (
+      <div className="feature-item">
+        <Link to={`/features/${featureType}/${id}`}>
+          <p className="feature-item-text">{text}</p>
+        </Link>
+        <button onClick={handleEdit}>Edit</button>
+        {isOpen && ModalController && (
+          <ModalController
+            onSave={handleUpdateFeature}
+            featureType={featureType}
+            isEditing={true}
+            initialText={text}
+            initialDescription={description}
+            isOpen={isOpen}
+            onClose={closeModal}
+            featureId={id}
+            featureTypes={featureTypes}
+            features={features}
+          />
+        )}
+        <button onClick={handleDelete}>Delete</button>
+      </div>
+    );
+  }
+);
 
 export default FeatureItem;

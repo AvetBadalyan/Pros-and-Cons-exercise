@@ -1,12 +1,12 @@
 import React from "react";
 
-interface GoogleIconProps {
+interface EmptyIconProps {
   fill: string;
   width: string;
   height: string;
 }
 
-const GoogleIcon: React.FC<GoogleIconProps> = ({ fill, width, height }) => (
+const EmptyIcon: React.FC<EmptyIconProps> = ({ fill, width, height }) => (
   <svg
     width={width}
     height={height}
@@ -18,4 +18,4 @@ const GoogleIcon: React.FC<GoogleIconProps> = ({ fill, width, height }) => (
   </svg>
 );
 
-export default GoogleIcon;
+export default EmptyIcon;

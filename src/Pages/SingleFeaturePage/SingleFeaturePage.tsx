@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./SingleFeaturePage.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../Store/store";
+import { FeaturesState } from "../../Store/FeatureSlice/actions/types";
 
-const SingleFeaturePage: React.FC = () => {
-  const feats = useSelector((state: RootState) => state.featuresSlice);
+interface SingleFeaturePageProps {
+  features: FeaturesState;
+}
 
+const SingleFeaturePage: React.FC<SingleFeaturePageProps> = ({ features }) => {
   const { featureType, featureId } = useParams<{
     featureType: string;
     featureId: string;
@@ -14,8 +15,8 @@ const SingleFeaturePage: React.FC = () => {
 
   const selectedFeature =
     featureType &&
-    feats[featureType] &&
-    feats[featureType]?.find((feature) => feature.id === featureId);
+    features[featureType] &&
+    features[featureType]?.find((feature) => feature.id === featureId);
 
   return (
     <div className="single-feature-page">

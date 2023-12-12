@@ -1,22 +1,25 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../Store/store";
 import FeatureItem from "./FeatureItem/FeatureItem";
-import { SingleFeature } from "../../../../Store/FeatureSlice/actions/types";
+import {
+  FeaturesState,
+  SingleFeature,
+} from "../../../../Store/FeatureSlice/actions/types";
 
-const FeatureList = ({
-  featureType,
-  featureTypes,
-}: {
+interface FeatureListProps {
   featureType: string;
   featureTypes: string[];
-}) => {
-  const feats = useSelector((state: RootState) => state.featuresSlice);
+  features: FeaturesState;
+}
 
+const FeatureList: React.FC<FeatureListProps> = ({
+  featureType,
+  featureTypes,
+  features,
+}) => {
   useEffect(() => {
     const sendToLocalStorage = () => {
       try {
-        localStorage.setItem("storedFeatures", JSON.stringify(feats));
+        localStorage.setItem("storedFeatures", JSON.stringify(features));
       } catch (error) {
         console.error("Failed to store data in localStorage:", error);
       }
@@ -26,17 +29,18 @@ const FeatureList = ({
     return () => {
       window.removeEventListener("beforeunload", sendToLocalStorage);
     };
-  }, [feats]);
+  }, [features]);
 
   return (
     <div className="feature-list">
-      {feats[featureType].map((singleFeature: SingleFeature) => {
+      {features[featureType].map((singleFeature: SingleFeature) => {
         if (singleFeature.featureType === featureType) {
           return (
             <FeatureItem
               key={singleFeature.id}
               feature={singleFeature}
               featureTypes={featureTypes}
+              features={features}
             />
           );
         }

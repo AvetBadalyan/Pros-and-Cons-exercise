@@ -6,10 +6,9 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../Store/store";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
 
 export interface FeatureModalProps {
   isOpen: boolean;
@@ -21,6 +20,7 @@ export interface FeatureModalProps {
   initialDescription?: string;
   featureId?: string;
   featureTypes: string[];
+  features: FeaturesState;
 }
 
 const FeatureModal: React.FC<FeatureModalProps> = ({
@@ -33,18 +33,18 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
   initialDescription = "",
   featureId = "",
   featureTypes,
+  features,
 }) => {
   const [featureText, setFeatureText] = React.useState(initialText);
   const [featureDescription, setFeatureDescription] =
     React.useState(initialDescription);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const features = useSelector((state: RootState) => state.featuresSlice);
 
   const validateFeatureText = (text: string) => {
     const trimmedText = text.trim();
 
     if (!trimmedText) {
-      setErrorMessage("Required! Text cannot be empty!");
+      setErrorMessage("Text cannot be empty!");
       return;
     }
 
@@ -56,7 +56,7 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
       });
 
       if (duplicateInColumn) {
-        setErrorMessage(`Feature already exists in ${type} column!`);
+        setErrorMessage(`Feature exists in ${type} column!`);
       }
 
       return duplicateInColumn;
