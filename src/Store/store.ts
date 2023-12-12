@@ -1,4 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "@redux-devtools/extension";
 import featReducer from "./FeatureSlice/reducers/featReducer";
 import { Dispatch } from "redux";
 import { FeatAction } from "./FeatureSlice/actions/types";
@@ -10,7 +11,10 @@ const rootReducer = combineReducers({
   featuresSlice: featReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export type AppDispatch = Dispatch<FeatAction>;
 export { store as default };
