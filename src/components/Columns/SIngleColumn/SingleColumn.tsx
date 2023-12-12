@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
+import "./SingleColumn.scss";
 
 interface SingleColumnProps {
   featureType: string;

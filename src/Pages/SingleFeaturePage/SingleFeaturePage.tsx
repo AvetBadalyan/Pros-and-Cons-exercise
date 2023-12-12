@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./SingleFeaturePage.scss";
 import { FeaturesState } from "../../Store/FeatureSlice/actions/types";
 
@@ -28,6 +28,10 @@ const SingleFeaturePage: React.FC<SingleFeaturePageProps> = ({ features }) => {
         {(selectedFeature && selectedFeature.description) ||
           "No description available"}
       </p>
+
+      <Link to="/">
+        <button className="back-to-home-btn">Go back to home Page</button>
+      </Link>
     </div>
   );
 };

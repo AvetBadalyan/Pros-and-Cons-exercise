@@ -1,3 +1,36 @@
-.feature-item-text {
-  min-width: 525px !important;
+.feature-item {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  align-items: center;
+  height: fit-content;
+  word-break: break-all;
+
+  a {
+    background-color: rgb(110, 109, 112);
+    color: white;
+    border-radius: 8px;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  a:hover {
+    background-color: rgba(110, 109, 112, 0.8);
+    cursor: pointer;
+  }
+
+  a:active {
+    box-shadow: none;
+    top: 2px;
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+      0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
+
+  button {
+    min-width: 100px;
+    padding: 6px;
+  }
 }

@@ -1,3 +1,29 @@
 .single-feature-page {
   color: white;
+  padding: 12px;
+
+  h1 {
+    text-align: center;
+  }
+
+  .back-to-home-btn {
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
+    border: none;
+    background: rgb(110, 109, 112);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1),
+      inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5),
+      0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
+    color: #dfdedf;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .back-to-home-btn:focus {
+    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+      0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(58, 108, 217, 0.5);
+    outline: 0;
+  }
 }

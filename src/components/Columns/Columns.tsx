@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import SingleColumn from "./SIngleColumn/SingleColumn";
 import { FeaturesState } from "../../Store/FeatureSlice/actions/types";
+import "./Columns.scss";
 
 interface ColumnsProps {
   features: FeaturesState;

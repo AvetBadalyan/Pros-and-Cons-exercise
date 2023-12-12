@@ -11,17 +11,18 @@ import {
   SingleFeature,
 } from "../../../../../Store/FeatureSlice/actions/types";
 import { Link } from "react-router-dom";
-import "./FeatureItem.scss";
 import { useModal } from "../../../../../Helpers/useModalHook";
+import "./FeatureItem.scss";
 
 interface FeatureItemProps {
   feature: SingleFeature;
   featureTypes: string[];
   features: FeaturesState;
+  index: number;
 }
 
 const FeatureItem: React.FC<FeatureItemProps> = memo(
-  ({ feature, featureTypes, features }) => {
+  ({ feature, featureTypes, features, index }) => {
     const dispatch: AppDispatch = useDispatch();
     const { id, featureType, text, description } = feature;
     const { isOpen, openModal, closeModal, ModalController } = useModal();
@@ -45,7 +46,9 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
     return (
       <div className="feature-item">
         <Link to={`/features/${featureType}/${id}`}>
-          <p className="feature-item-text">{text}</p>
+          <p className="feature-item-text">
+            Pro number {index + 1}: {text}
+          </p>
         </Link>
         <button onClick={handleEdit}>Edit</button>
         {isOpen && ModalController && (

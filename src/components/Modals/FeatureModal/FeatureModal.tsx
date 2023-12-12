@@ -35,9 +35,9 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
   featureTypes,
   features,
 }) => {
-  const [featureText, setFeatureText] = React.useState(initialText);
+  const [featureText, setFeatureText] = useState(initialText);
   const [featureDescription, setFeatureDescription] =
-    React.useState(initialDescription);
+    useState(initialDescription);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateFeatureText = (text: string) => {
@@ -85,6 +85,8 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
 
   console.log(errorMessage, "errorMessage");
 
+  const isSameTextInEditingMode = isEditing && featureText === initialText;
+
   useEffect(() => {
     if (errorMessage !== null && errorMessage !== "") {
       toast.error(errorMessage, {
@@ -102,7 +104,41 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
 
   return (
     <div>
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog
+        open={isOpen}
+        onClose={onClose}
+        PaperProps={{
+          sx: {
+            backgroundColor: "rgb(110, 109, 112)",
+            color: "white",
+            borderRadius: 8,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+            animation: "fadeIn ease-in-out 0.3s",
+            "& .MuiDialogActions-root": {
+              padding: "12px 24px",
+            },
+            "& .MuiDialogContent-root": {
+              padding: "8px 24px",
+              "& .MuiInputBase-root, & .MuiInputLabel-root, & .MuiFormLabel-root":
+                {
+                  color: "white",
+                  borderRadius: 2,
+                },
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "white",
+                },
+                "&:hover fieldset": {
+                  borderColor: "white",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "white",
+                },
+              },
+            },
+          },
+        }}
+      >
         <DialogTitle>
           {isEditing
             ? makeUpperCase(`Edit ${featureType}`)
@@ -130,7 +166,7 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
           <Button
-            disabled={!!errorMessage || !featureText}
+            disabled={!!errorMessage || !featureText || isSameTextInEditingMode}
             variant="contained"
             onClick={handleSave}
           >
