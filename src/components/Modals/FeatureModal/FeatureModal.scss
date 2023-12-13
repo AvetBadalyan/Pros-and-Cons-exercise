@@ -1,0 +1,62 @@
+.feature-modal {
+  background: rgb(110, 109, 112);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn ease-in-out 0.3s;
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    input[type="text"],
+    textarea {
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 4px;
+      color: white;
+      padding: 8px;
+      margin-bottom: 12px;
+      width: 100%;
+      box-sizing: border-box;
+
+      &::placeholder {
+        color: white;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    .feature-modal-close-button {
+      display: none;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &[disabled] {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+    }
+  }
+}

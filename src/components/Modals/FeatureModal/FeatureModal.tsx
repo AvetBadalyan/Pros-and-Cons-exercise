@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
+import { Modal } from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import "./FeatureModal.scss";
 
 export interface FeatureModalProps {
   isOpen: boolean;
@@ -40,6 +37,32 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
     useState(initialDescription);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (errorMessage !== null && errorMessage !== "") {
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [errorMessage]);
+
+  const handleFeatureTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFeatureText(e.target.value);
+    validateFeatureText(e.target.value);
+  };
+
+  const handleFeatureDescriptionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setFeatureDescription(e.target.value);
+  };
+
   const validateFeatureText = (text: string) => {
     const trimmedText = text.trim();
 
@@ -67,114 +90,51 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
     }
   };
 
-  const handleFeatureTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFeatureText(e.target.value);
-    validateFeatureText(e.target.value);
-  };
-
-  const handleFeatureDescriptionChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFeatureDescription(e.target.value);
-  };
-
   const handleSave = () => {
     onSave(featureText, featureDescription);
     onClose();
   };
-
-  console.log(errorMessage, "errorMessage");
-
   const isSameTextInEditingMode = isEditing && featureText === initialText;
 
-  useEffect(() => {
-    if (errorMessage !== null && errorMessage !== "") {
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  }, [errorMessage]);
-
   return (
-    <div>
-      <Dialog
-        open={isOpen}
-        onClose={onClose}
-        PaperProps={{
-          sx: {
-            backgroundColor: "rgb(110, 109, 112)",
-            color: "white",
-            borderRadius: 8,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-            animation: "fadeIn ease-in-out 0.3s",
-            "& .MuiDialogActions-root": {
-              padding: "12px 24px",
-            },
-            "& .MuiDialogContent-root": {
-              padding: "8px 24px",
-              "& .MuiInputBase-root, & .MuiInputLabel-root, & .MuiFormLabel-root":
-                {
-                  color: "white",
-                  borderRadius: 2,
-                },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": {
-                  borderColor: "white",
-                },
-                "&:hover fieldset": {
-                  borderColor: "white",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "white",
-                },
-              },
-            },
-          },
-        }}
-      >
-        <DialogTitle>
+    <Modal
+      open={isOpen}
+      onClose={onClose}
+      center
+      classNames={{
+        modal: "feature-modal",
+        closeButton: "feature-modal-close-button",
+      }}
+    >
+      <div className="modal-content">
+        <h2>
           {isEditing
             ? makeUpperCase(`Edit ${featureType}`)
             : makeUpperCase(`Add a new feature in ${featureType}`)}
-        </DialogTitle>
-        <DialogContent sx={{ width: "555px" }}>
-          <TextField
-            label="Feature Text"
-            fullWidth
-            margin="normal"
-            value={featureText}
-            onChange={handleFeatureTextChange}
-            required
-          />
-          <TextField
-            label="Feature Description"
-            fullWidth
-            multiline
-            rows={4}
-            margin="normal"
-            value={featureDescription}
-            onChange={handleFeatureDescriptionChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button
+        </h2>
+        <input
+          type="text"
+          placeholder="Feature Text"
+          value={featureText}
+          onChange={handleFeatureTextChange}
+          required
+        />
+        <textarea
+          placeholder="Feature Description"
+          value={featureDescription}
+          onChange={handleFeatureDescriptionChange}
+        ></textarea>
+        <div className="modal-footer">
+          <button onClick={onClose}>Cancel</button>
+          <button
             disabled={!!errorMessage || !featureText || isSameTextInEditingMode}
-            variant="contained"
             onClick={handleSave}
           >
             Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+          </button>
+        </div>
+      </div>
+    </Modal>
   );
 };
 
