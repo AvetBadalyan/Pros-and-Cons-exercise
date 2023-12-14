@@ -1,34 +1,38 @@
 .feature-modal {
-  background: rgb(110, 109, 112);
+  background: rgba(0, 0, 0, 0.8);
   color: white;
   border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn ease-in-out 0.3s;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+  animation: fadeIn ease-in-out 1s;
+  padding: 0 12px;
+  min-width: 555px;
+
+  .react-responsive-modal-closeButton {
+    display: none;
+  }
 
   .modal-content {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px;
-
-    .modal-footer {
-      display: flex;
-      justify-content: space-between;
-    }
+    gap: 20px;
+    padding: 24px;
 
     input[type="text"],
     textarea {
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0.1);
       border: 1px solid white;
-      border-radius: 4px;
+      border-radius: 6px;
       color: white;
-      padding: 8px;
-      margin-bottom: 12px;
+      padding: 12px;
+      margin-bottom: 20px;
       width: 100%;
       box-sizing: border-box;
+      font-size: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: normal;
 
       &::placeholder {
-        color: white;
+        color: rgba(255, 255, 255, 0.7);
       }
 
       &:focus-visible {
@@ -36,27 +40,40 @@
       }
     }
 
-    .feature-modal-close-button {
-      display: none;
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 24px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #2980b9;
+        }
+
+        &[disabled] {
+          opacity: 0.6;
+          pointer-events: none;
+        }
+      }
     }
+  }
 
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 8px 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #0056b3;
-      }
-
-      &[disabled] {
-        opacity: 0.6;
-        pointer-events: none;
-      }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }

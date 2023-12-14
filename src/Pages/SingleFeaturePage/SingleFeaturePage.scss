@@ -1,29 +1,42 @@
 .single-feature-page {
-  color: white;
-  padding: 12px;
+  color: #f8f8f8;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
     text-align: center;
   }
 
-  .back-to-home-btn {
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 6px;
-    border: none;
-    background: rgb(110, 109, 112);
-    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1),
-      inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5),
-      0px 0px 0px 0.5px rgba(0, 0, 0, 0.12);
-    color: #dfdedf;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+  p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  .back-to-home-btn:focus {
-    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
-      0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(58, 108, 217, 0.5);
-    outline: 0;
+  .back-to-home-btn {
+    padding: 12px 24px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+    }
   }
 }

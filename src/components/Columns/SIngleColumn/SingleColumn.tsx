@@ -9,7 +9,6 @@ import {
 import FeatureList from "./FeatureList/FeatureList";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 import { useModal } from "../../../Helpers/useModalHook";
-import { Button } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
@@ -49,9 +48,9 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
     <div className="side" key={featureType}>
       <div className="form-header">
         <h2> {makeUpperCase(`Your ${featureType} here`)} </h2>
-        <Button variant="outlined" onClick={handleOpenModal}>
+        <button className="add-new-modal-btn" onClick={handleOpenModal}>
           {makeUpperCase(`Add a new feature in ${featureType}`)}
-        </Button>
+        </button>
         <ToastContainer
           position="top-right"
           autoClose={2000}

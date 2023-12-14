@@ -94,7 +94,9 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
     onSave(featureText, featureDescription);
     onClose();
   };
-  const isSameTextInEditingMode = isEditing && featureText === initialText;
+
+  const isSameTextAndDescription =
+    initialText === featureText && initialDescription === featureDescription;
 
   return (
     <Modal
@@ -123,11 +125,14 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
           placeholder="Feature Description"
           value={featureDescription}
           onChange={handleFeatureDescriptionChange}
+          rows={5}
         ></textarea>
         <div className="modal-footer">
           <button onClick={onClose}>Cancel</button>
           <button
-            disabled={!!errorMessage || !featureText || isSameTextInEditingMode}
+            disabled={
+              !!errorMessage || isSameTextAndDescription || !featureText
+            }
             onClick={handleSave}
           >
             Save
