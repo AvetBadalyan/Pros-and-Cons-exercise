@@ -46,23 +46,24 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
 
   return (
     <div className="side" key={featureType}>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <div className="form-header">
         <h2> {makeUpperCase(`Your ${featureType} here`)} </h2>
         <button className="add-new-modal-btn" onClick={handleOpenModal}>
           {makeUpperCase(`Add a new feature in ${featureType}`)}
         </button>
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
 
         {isOpen && ModalController && (
           <ModalController

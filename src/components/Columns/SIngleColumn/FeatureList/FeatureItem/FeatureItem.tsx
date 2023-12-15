@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { useModal } from "../../../../../Helpers/useModalHook";
 import "./FeatureItem.scss";
+import { toast } from "react-toastify";
 
 interface FeatureItemProps {
   feature: SingleFeature;
@@ -40,7 +41,7 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
       editedDescription: string
     ) => {
       dispatch(updateFeat(id, featureType, editedText, editedDescription));
-      closeModal();
+      toast.success("Successfully saved!");
     };
 
     return (

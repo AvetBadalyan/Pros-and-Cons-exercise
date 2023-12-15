@@ -37,18 +37,20 @@ const featReducer = (
       };
 
     case ACTION_TYPES.UPDATE_FEAT: {
-      const featureToUpdate = state[action.payload.featureType].find(
-        (feat) => feat.id === action.payload.id
-      );
-
-      if (featureToUpdate) {
-        featureToUpdate.text = action.payload.text;
-        featureToUpdate.description = action.payload.description;
-      }
+      const { featureType, id, text, description } = action.payload;
 
       return {
         ...state,
-        [action.payload.featureType]: [...state[action.payload.featureType]],
+        [featureType]: state[featureType].map((feature) => {
+          if (feature.id === id) {
+            return {
+              ...feature,
+              text,
+              description,
+            };
+          }
+          return feature;
+        }),
       };
     }
 

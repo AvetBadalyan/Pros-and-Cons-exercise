@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import FeatureItem from "./FeatureItem/FeatureItem";
 import {
   FeaturesState,
@@ -32,24 +32,26 @@ const FeatureList: React.FC<FeatureListProps> = ({
     };
   }, [features]);
 
+  const filteredFeatures = useMemo(
+    () =>
+      features[featureType].filter(
+        (singleFeature: SingleFeature) =>
+          singleFeature.featureType === featureType
+      ),
+    [features, featureType]
+  );
+
   return (
     <div className="feature-list">
-      {features[featureType].map(
-        (singleFeature: SingleFeature, index: number) => {
-          if (singleFeature.featureType === featureType) {
-            return (
-              <FeatureItem
-                key={singleFeature.id}
-                feature={singleFeature}
-                featureTypes={featureTypes}
-                features={features}
-                index={index}
-              />
-            );
-          }
-          return null;
-        }
-      )}
+      {filteredFeatures.map((singleFeature: SingleFeature, index: number) => (
+        <FeatureItem
+          key={singleFeature.id}
+          feature={singleFeature}
+          featureTypes={featureTypes}
+          features={features}
+          index={index}
+        />
+      ))}
     </div>
   );
 };
