@@ -32,10 +32,6 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
       dispatch(deleteFeat(id, featureType) as DeleteFeatAction);
     }, [dispatch, id, featureType]);
 
-    const handleEdit = () => {
-      openModal();
-    };
-
     const handleUpdateFeature = (
       editedText: string,
       editedDescription: string
@@ -48,10 +44,10 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
       <div className="feature-item">
         <Link to={`/features/${featureType}/${id}`}>
           <p className="feature-item-text">
-            Pro number {index + 1}: {text}
+            N {index + 1}: {text}
           </p>
         </Link>
-        <button onClick={handleEdit}>Edit</button>
+        <button onClick={openModal}>Edit</button>
         {isOpen && ModalController && (
           <ModalController
             onSave={handleUpdateFeature}

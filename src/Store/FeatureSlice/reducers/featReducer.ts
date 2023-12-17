@@ -54,6 +54,12 @@ const featReducer = (
       };
     }
 
+    case ACTION_TYPES.UPDATE_FEATURES:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
     default:
       return state;
   }

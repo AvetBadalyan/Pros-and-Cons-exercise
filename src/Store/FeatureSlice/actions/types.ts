@@ -36,8 +36,13 @@ export interface UpdateFeatAction {
   };
 }
 
+export interface UpdateFeaturesAction {
+  type: ACTION_TYPES.UPDATE_FEATURES;
+  payload: FeaturesState;
+}
 export type FeatAction =
   | AddFeatAction
   | DeleteFeatAction
   | EmptyTypeStoreAction
-  | UpdateFeatAction;
+  | UpdateFeatAction
+  | UpdateFeaturesAction;
