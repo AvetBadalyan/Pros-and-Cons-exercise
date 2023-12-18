@@ -44,6 +44,8 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
     [dispatch]
   );
 
+  console.log(features[featureType].length);
+
   return (
     <div className="side" key={featureType}>
       <ToastContainer
@@ -79,10 +81,10 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
         <button
           onClick={() => emptyTypeStoreHandler(featureType)}
           className="empty-btn"
-          disabled={features[featureType].length < 0}
+          disabled={features[featureType].length === 0}
         >
           <EmptyIcon fill="white" width="16px" height="15px" />
-          <span> Empty {featureType}</span>
+          <span> {makeUpperCase(`Empty ${featureType}`)}</span>
         </button>
       </div>
 

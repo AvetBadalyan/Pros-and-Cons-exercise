@@ -62,7 +62,10 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
             features={features}
           />
         )}
-        <button onClick={handleDelete}>Delete</button>
+
+        <button onClick={handleDelete} className="delete-btn">
+          Delete
+        </button>
       </div>
     );
   }
