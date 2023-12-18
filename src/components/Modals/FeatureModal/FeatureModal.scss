@@ -4,7 +4,8 @@
   border-radius: 8px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
   animation: fadeIn ease-in-out 1s;
-  padding: 0 12px;
+  padding: 0;
+  margin: 0;
   min-width: 555px;
 
   .react-responsive-modal-closeButton {
@@ -21,15 +22,11 @@
     textarea {
       background-color: rgba(255, 255, 255, 0.1);
       border: 1px solid white;
-      border-radius: 6px;
+      border-radius: 8px;
       color: white;
       padding: 12px;
-      margin-bottom: 20px;
       width: 100%;
-      box-sizing: border-box;
       font-size: 16px;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: normal;
 
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
@@ -49,13 +46,13 @@
         background-color: #3498db;
         color: white;
         border: none;
-        border-radius: 6px;
+        border-radius: 8px;
         padding: 12px 24px;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: #2980b9;
+          opacity: 0.85;
         }
 
         &[disabled] {
@@ -71,6 +68,7 @@
       opacity: 0;
       transform: scale(0.9);
     }
+
     to {
       opacity: 1;
       transform: scale(1);

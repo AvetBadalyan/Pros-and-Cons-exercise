@@ -1,6 +1,6 @@
 .side {
   flex: 1;
-  padding: 1rem;
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -10,36 +10,20 @@
     justify-content: space-between;
     align-items: center;
     gap: 12px;
+    font-size: 16px;
 
     .add-new-modal-btn {
-      background-color: #1a1a1a;
-      border: 2px solid whitesmoke;
-      border-radius: 15px;
-      color: #ffffff;
-      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-        "Segoe UI Symbol";
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 8px;
+      color: #0d172a;
+      box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
       font-size: 16px;
+      padding: 6px 12px;
       font-weight: 600;
-      min-height: 30px;
-      outline: none;
-      padding: 16px;
-      text-align: center;
-      text-decoration: none;
-      transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      will-change: transform;
 
       &:hover {
-        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-        transform: translateY(-2px);
-      }
-
-      &:active {
-        box-shadow: none;
-        transform: translateY(0);
+        background-color: #1e293b;
+        color: #fff;
       }
     }
 
@@ -47,39 +31,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #ff4742;
-      border: 1px solid #ff4742;
-      border-radius: 6px;
-      box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-      box-sizing: border-box;
+      background: #dc322f;
+      border-radius: 8px;
       color: #ffffff;
       cursor: pointer;
-      font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
       font-size: 16px;
-      font-weight: 800;
+      padding: 6px 12px;
+      font-weight: 600;
       outline: 0;
-      text-align: center;
+      border: none;
       transition: 0.3s;
       text-align: center;
+
+      &:disabled {
+        pointer-events: none;
+      }
+
+      &:hover,
+      &:active {
+        background: #c0392b;
+      }
     }
 
-    .empty-btn:disabled {
-      pointer-events: none;
-    }
-
-    .empty-btn:hover,
-    .empty-btn:active {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    .empty-btn:active {
-      opacity: 0.5;
-    }
-
-    span {
-      font-size: 14px;
-      padding-top: 2px;
-    }
   }
 }

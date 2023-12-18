@@ -1,6 +1,7 @@
 import { ACTION_TYPES } from "./actionTypes";
 import {
   AddFeatAction,
+  DeleteFeatAction,
   EmptyTypeStoreAction,
   FeaturesState,
   UpdateFeatAction,
@@ -20,17 +21,18 @@ export const addFeat = (
   },
 });
 
-export const deleteFeat = (id: string, featureType: string) => ({
+export const deleteFeat = (
+  id: string,
+  featureType: string
+): DeleteFeatAction => ({
   type: ACTION_TYPES.DELETE_FEAT,
   payload: { id, featureType },
 });
 
-export const emptyTypeStore = (featureType: string): EmptyTypeStoreAction => {
-  return {
-    type: ACTION_TYPES.EMPTY_TYPE_STORE,
-    payload: featureType,
-  };
-};
+export const emptyTypeStore = (featureType: string): EmptyTypeStoreAction => ({
+  type: ACTION_TYPES.EMPTY_TYPE_STORE,
+  payload: featureType,
+});
 
 export const updateFeat = (
   id: string,

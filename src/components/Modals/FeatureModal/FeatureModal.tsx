@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,6 +37,8 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
     useState(initialDescription);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (errorMessage !== null && errorMessage !== "") {
       toast.error(errorMessage, {
@@ -54,7 +56,14 @@ const FeatureModal: React.FC<FeatureModalProps> = ({
 
   const handleFeatureTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFeatureText(e.target.value);
-    validateFeatureText(e.target.value);
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      validateFeatureText(e.target.value);
+    }, 500);
   };
 
   const handleFeatureDescriptionChange = (

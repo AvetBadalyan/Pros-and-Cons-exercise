@@ -6,56 +6,80 @@
   height: fit-content;
 
   a {
-    background-color: rgb(110, 109, 112);
     color: white;
     border-radius: 8px;
+    font-size: 16px;
     padding: 6px 12px;
-    position: relative;
+    font-weight: 600;
     text-decoration: none;
     text-transform: uppercase;
-  }
-
-  a:hover {
-    background-color: rgba(110, 109, 112, 0.8);
+    flex: 1;
+    text-align: end;
     cursor: pointer;
+    background-image: linear-gradient(#464d55, #25292e);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .1), 0 3px 6px rgba(0, 0, 0, .05);
+
+    &:hover {
+      box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+      opacity: .85;
+    }
+
+    &:active {
+      box-shadow: none;
+      top: 2px;
+      box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+        0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(58, 108, 217, 0.5);
+      outline: 0;
+    }
+
+    &:focus {
+      box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+    }
   }
 
-  a:active {
-    box-shadow: none;
-    top: 2px;
-    box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
-      0px 0.5px 1px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(58, 108, 217, 0.5);
-    outline: 0;
-  }
+  .edit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #0A66C2;
+    font-weight: 600;
 
-  button {
-    min-width: 100px;
+    &:active {
+      background: #09223b;
+      color: rgb(255, 255, 255, .7);
+    }
+
+    &:hover,
+    &:focus {
+      background-color: #16437E;
+      color: #ffffff;
+    }
   }
 
   .delete-btn {
-    background: #ff4742;
-    border: 1px solid #ff4742;
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-    box-sizing: border-box;
+    background: #e74c3c;
+    border-radius: 8px;
     color: #ffffff;
     cursor: pointer;
-    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
     font-size: 16px;
-    font-weight: 800;
+    padding: 6px 12px;
+    font-weight: 600;
     outline: 0;
     text-align: center;
-    transition: 0.3s;
-    text-align: center;
-  }
 
-  .delete-btn:hover,
-  .delete-btn:active {
-    background-color: white;
-    color: #ff4742;
-  }
+    &:hover {
+      background: #c0392b;
+    }
 
-  .delete-btn:active {
-    opacity: 0.5;
+    &:active {
+      background: #c0392b;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import EmptyIcon from "../../../assets/icons/Icon";
+import EmptyIcon from "../../../assets/icons/remove-Icon";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../Store/store";
 import {
@@ -83,7 +83,7 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
           className="empty-btn"
           disabled={features[featureType].length === 0}
         >
-          <EmptyIcon fill="white" width="16px" height="15px" />
+          <EmptyIcon fill="white" width="16px" height="16px" />
           <span> {makeUpperCase(`Empty ${featureType}`)}</span>
         </button>
       </div>

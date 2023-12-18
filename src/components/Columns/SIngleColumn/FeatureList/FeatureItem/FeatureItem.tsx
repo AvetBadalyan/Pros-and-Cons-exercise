@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useModal } from "../../../../../Helpers/useModalHook";
 import "./FeatureItem.scss";
 import { toast } from "react-toastify";
+import EditIcon from "../../../../../assets/icons/edit-icon";
 
 interface FeatureItemProps {
   feature: SingleFeature;
@@ -43,11 +44,14 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
     return (
       <div className="feature-item">
         <Link to={`/features/${featureType}/${id}`}>
-          <p className="feature-item-text">
+          <span className="feature-item-text">
             N {index + 1}: {text}
-          </p>
+          </span>
         </Link>
-        <button onClick={openModal}>Edit</button>
+        <button className="edit-btn" onClick={openModal}>
+          <EditIcon fill="white" width="16px" height="15px" />
+          <span> Edit</span>
+        </button>
         {isOpen && ModalController && (
           <ModalController
             onSave={handleUpdateFeature}
