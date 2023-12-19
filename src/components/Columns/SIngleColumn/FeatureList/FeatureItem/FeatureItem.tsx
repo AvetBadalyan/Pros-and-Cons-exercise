@@ -50,7 +50,7 @@ const FeatureItem: React.FC<FeatureItemProps> = memo(
           </span>
         </Link>
         <button className="edit-btn" onClick={openModal}>
-          <EditIcon fill="white" width="16px" height="15px" />
+          <EditIcon fill="white" width="16px" height="16px" />
           <span> Edit</span>
         </button>
         {isOpen && ModalController && (

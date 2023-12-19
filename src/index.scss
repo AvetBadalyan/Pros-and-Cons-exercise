@@ -19,5 +19,18 @@ body {
 button,
 a {
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1rem;
+}
+
+@media (max-width: 1024px) {
+  body {
+    button,
+    a {
+      font-size: 0.75rem;
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+  }
 }

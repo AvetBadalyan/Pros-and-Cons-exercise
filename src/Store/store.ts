@@ -18,12 +18,16 @@ const rootReducer = combineReducers({
 });
 
 const localStorageMiddleware: Middleware = (store) => (next) => (action) => {
-  const result = next(action);
-  localStorage.setItem(
-    "storedFeatures",
-    JSON.stringify((store.getState() as RootState).featuresSlice)
-  );
-  return result;
+  try {
+    const result = next(action);
+    localStorage.setItem(
+      "storedFeatures",
+      JSON.stringify((store.getState() as RootState).featuresSlice)
+    );
+    return result;
+  } catch (error) {
+    console.error("Error handling localStorage:", error);
+  }
 };
 
 const composeEnhancers =

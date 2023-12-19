@@ -6,6 +6,7 @@ import {
   FeaturesState,
   UpdateFeatAction,
 } from "./types";
+import { v4 as uuidv4 } from "uuid";
 
 export const addFeat = (
   text: string,
@@ -14,7 +15,7 @@ export const addFeat = (
 ): AddFeatAction => ({
   type: ACTION_TYPES.ADD_FEAT,
   payload: {
-    id: Number(Math.round(Math.random() * 10000)).toString(),
+    id: uuidv4(),
     text,
     description,
     featureType,
