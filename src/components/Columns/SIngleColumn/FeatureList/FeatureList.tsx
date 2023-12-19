@@ -7,7 +7,7 @@ import Paginate from "./Pagination/Paginate";
 import FeatureItem from "./FeatureItem/FeatureItem";
 import "./FeatureList.scss";
 
-const FeaturesPerPage = 10;
+const FeaturesPerPage = 12;
 
 interface FeatureListProps {
   featureType: string;
@@ -50,6 +50,9 @@ const FeatureList: React.FC<FeatureListProps> = ({
     }
   };
 
+  const paginateIndex = (index: number) => {
+    return index + (currentPage - 1) * FeaturesPerPage;
+  };
   const showPagination = filteredFeatures.length > FeaturesPerPage;
 
   return (
@@ -61,7 +64,7 @@ const FeatureList: React.FC<FeatureListProps> = ({
             feature={singleFeature}
             featureTypes={featureTypes}
             features={features}
-            index={index}
+            index={paginateIndex(index)}
           />
         ))}
       </div>

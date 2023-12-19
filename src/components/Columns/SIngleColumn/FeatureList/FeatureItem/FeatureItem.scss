@@ -17,12 +17,12 @@
     flex: 1;
     text-align: end;
     cursor: pointer;
-    background-image: linear-gradient(#464d55, #25292e);
+    background: #1e293b;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.05);
 
     &:hover {
       box-shadow: rgba(0, 1, 0, 0.2) 0 2px 8px;
-      opacity: 0.85;
+      background-color: rgba(255, 255, 255, 0.35);
     }
 
     &:active {

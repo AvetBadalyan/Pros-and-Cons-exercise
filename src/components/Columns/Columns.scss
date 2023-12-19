@@ -1,13 +1,12 @@
 .columns {
   position: relative;
   display: flex;
-  justify-content: space-around;
-  height: 85%;
+  height: 100%;
 
   &::after {
     position: absolute;
     content: "";
-    top: 1%;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 3px;
