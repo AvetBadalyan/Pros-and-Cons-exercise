@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useModal } from "../../../../../Helpers/useModalHook";
 import "./FeatureItem.scss";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import EditIcon from "../../../../../assets/icons/edit-icon";
 
 interface FeatureItemProps {

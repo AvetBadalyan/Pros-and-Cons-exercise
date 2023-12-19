@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import FeatureItem from "./FeatureItem/FeatureItem";
 import {
   FeaturesState,
@@ -17,21 +17,6 @@ const FeatureList: React.FC<FeatureListProps> = ({
   featureTypes,
   features,
 }) => {
-  useEffect(() => {
-    const sendToLocalStorage = () => {
-      try {
-        localStorage.setItem("storedFeatures", JSON.stringify(features));
-      } catch (error) {
-        console.error("Failed to store data in localStorage:", error);
-      }
-    };
-    window.addEventListener("beforeunload", sendToLocalStorage);
-
-    return () => {
-      window.removeEventListener("beforeunload", sendToLocalStorage);
-    };
-  }, [features]);
-
   const filteredFeatures = useMemo(
     () =>
       features[featureType].filter(

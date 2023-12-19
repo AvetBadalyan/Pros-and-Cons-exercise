@@ -9,7 +9,7 @@ import {
 import FeatureList from "./FeatureList/FeatureList";
 import { makeUpperCase } from "../../../Helpers/communFunctions";
 import { useModal } from "../../../Helpers/useModalHook";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FeaturesState } from "../../../Store/FeatureSlice/actions/types";
 import "./SingleColumn.scss";
@@ -33,10 +33,6 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
     toast.success("Successfully saved!");
   };
 
-  const handleOpenModal = () => {
-    openModal();
-  };
-
   const emptyTypeStoreHandler = useCallback(
     (featureType: string) => {
       dispatch(emptyTypeStore(featureType));
@@ -44,26 +40,11 @@ const SingleColumn: React.FC<SingleColumnProps> = ({
     [dispatch]
   );
 
-  console.log(features[featureType].length);
-
   return (
     <div className="side" key={featureType}>
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-
       <div className="form-header">
         <h2> {makeUpperCase(`Your ${featureType} here`)} </h2>
-        <button className="add-new-modal-btn" onClick={handleOpenModal}>
+        <button className="add-new-modal-btn" onClick={openModal}>
           {makeUpperCase(`Add a new feature in ${featureType}`)}
         </button>
 
