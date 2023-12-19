@@ -1,10 +1,13 @@
-import React, { useMemo } from "react";
-import FeatureItem from "./FeatureItem/FeatureItem";
+import { useMemo, useState } from "react";
 import {
   FeaturesState,
   SingleFeature,
 } from "../../../../Store/FeatureSlice/actions/types";
+import Paginate from "./Pagination/Paginate";
+import FeatureItem from "./FeatureItem/FeatureItem";
 import "./FeatureList.scss";
+
+const FeaturesPerPage = 10;
 
 interface FeatureListProps {
   featureType: string;
@@ -17,6 +20,8 @@ const FeatureList: React.FC<FeatureListProps> = ({
   featureTypes,
   features,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const filteredFeatures = useMemo(
     () =>
       features[featureType].filter(
@@ -26,18 +31,50 @@ const FeatureList: React.FC<FeatureListProps> = ({
     [features, featureType]
   );
 
+  const indexOfLastFeature = currentPage * FeaturesPerPage;
+  const indexOfFirstFeature = indexOfLastFeature - FeaturesPerPage;
+  const currentFeatures = filteredFeatures.slice(
+    indexOfFirstFeature,
+    indexOfLastFeature
+  );
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const goToPreviousPage = () => {
+    if (currentPage !== 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage !== Math.ceil(filteredFeatures.length / FeaturesPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const showPagination = filteredFeatures.length > FeaturesPerPage;
+
   return (
-    <div className="feature-list">
-      {filteredFeatures.map((singleFeature: SingleFeature, index: number) => (
-        <FeatureItem
-          key={singleFeature.id}
-          feature={singleFeature}
-          featureTypes={featureTypes}
-          features={features}
-          index={index}
+    <>
+      <div className="feature-list">
+        {currentFeatures.map((singleFeature: SingleFeature, index: number) => (
+          <FeatureItem
+            key={singleFeature.id}
+            feature={singleFeature}
+            featureTypes={featureTypes}
+            features={features}
+            index={index}
+          />
+        ))}
+      </div>
+      {showPagination && (
+        <Paginate
+          featuresPerPage={FeaturesPerPage}
+          totalFeatures={filteredFeatures.length}
+          paginate={paginate}
+          previousPage={goToPreviousPage}
+          nextPage={goToNextPage}
         />
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
