@@ -1,7 +1,7 @@
 import React from "react";
 import "./Pagination.scss";
 
-interface PaginateProps {
+interface PaginationProps {
   featuresPerPage: number;
   totalFeatures: number;
   paginate: (pageNumber: number) => void;
@@ -9,7 +9,7 @@ interface PaginateProps {
   nextPage: () => void;
 }
 
-const Paginate: React.FC<PaginateProps> = ({
+const Pagination: React.FC<PaginationProps> = ({
   featuresPerPage,
   totalFeatures,
   paginate,
@@ -45,4 +45,4 @@ const Paginate: React.FC<PaginateProps> = ({
   );
 };
 
-export default Paginate;
+export default Pagination;

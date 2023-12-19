@@ -3,7 +3,7 @@ import {
   FeaturesState,
   SingleFeature,
 } from "../../../../Store/FeatureSlice/actions/types";
-import Paginate from "./Pagination/Paginate";
+import Pagination from "./Pagination/Pagination";
 import FeatureItem from "./FeatureItem/FeatureItem";
 import "./FeatureList.scss";
 
@@ -69,7 +69,7 @@ const FeatureList: React.FC<FeatureListProps> = ({
         ))}
       </div>
       {showPagination && (
-        <Paginate
+        <Pagination
           featuresPerPage={FeaturesPerPage}
           totalFeatures={filteredFeatures.length}
           paginate={paginate}
